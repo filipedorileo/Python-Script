@@ -9,7 +9,7 @@ import pandas as pd
 
 
 
-dataFrom_IPs  = pd.read_csv(r'C:\Users\Findmore\Desktop\Ips.csv',sep=';')
+dataFrom_IPs  = pd.read_csv(r'C:\Users\xxx\Desktop\Ips.csv',sep=';')
 listA = []
 listB=[]
 Equals=[]
