@@ -50,23 +50,27 @@ list_Host #Lista de todos os objetos da Coluna 'host'
 list_Ips #Lista de todos os objetos da Coluna 'Ips'
 
 
-
 for i,iteminHost in enumerate(list_Host):
-
-        
+        print('-----------------------------------------------------')
+        print('Host:'+iteminHost)
         for index, row in enumerate(list_Ips):
             
             listB=list_Ips[index]
-                       
+            print('')   
+            print(listB)
             if iteminHost in listB:
                 
-                tempA = dataFrom_IPs.at[index, 'Equals']
-                print(tempA)
+                tempA = listB
+                
+                
+                
                 dataFrom_IPs.at[index, 'Equals']= iteminHost
-            
+                
+          
+                  
             else:
-             
-                dataFrom_IPs.at[index, 'Diff']=listB           
+                tempA.replace(iteminHost,'')
+                dataFrom_IPs.at[index, 'Diff']=tempA    
 
 
 
