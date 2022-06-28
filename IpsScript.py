@@ -9,54 +9,59 @@ listB = []
 Equals = []
 Diff = []
 
-
-dataFrom_IPs
-
-
 list_Host = dataFrom_IPs['Host'].tolist()
-
-list_Host
-
 list_Ips = dataFrom_IPs['Ips']
-
 
 listEquals = []
 listDiff = []
 temp_list = []
 listB = []
-
-
-list_Host  # Lista de todos os objetos da Coluna 'host'
-list_Ips  # Lista de todos os objetos da Coluna 'Ips'
-
 # listB=list_Ips[0]
 #listB = listB.split(",")
 
-
-
-
 for i, iteminHost in enumerate(list_Host):
-    print('-----------------------------------------------------')
-    print('Host:'+iteminHost)
-    for index, row in enumerate(list_Ips):
 
-        listB = list_Ips[index]
-        print('')
-        print(listB)
-        if iteminHost in listB:
-
-            dataFrom_IPs.at[index, 'Equals'] = iteminHost
-
-        else:
-            tempA = listB
-            tempA = tempA.replace(iteminHost, '')
-            print('#######')
-            print('tempA:  '+tempA)
-            print('#######')
-
-            dataFrom_IPs.at[index, 'Diff'] = tempA
+    for index, listinIps in enumerate(list_Ips):
+        tempA=[]
+        listinEqual=[]
+        listinDiff=[]
 
 
-dataFrom_IPs.head(18)
+        # print('')
+        # print(listB)
+        if iteminHost in listinIps:
 
-dataFrom_IPs.at[2, 'Diff']
+            listinEqual=dataFrom_IPs.at[index, 'Equals']
+            listinDiff=dataFrom_IPs.at[index, 'Diff']
+            if isinstance(listinEqual,list):
+                print("ok")
+            else:
+                listinEqual=listinEqual.split(",")
+
+            if isinstance(listinDiff,list):
+                print("ok")
+            else:
+                listinDiff=listinDiff.split(",")
+            
+            
+            #adicionar o que é igual
+            listinEqual.append(iteminHost)
+
+            #remover caso esteja na lista de Diff
+            if iteminHost in listinDiff:
+                listinDiff.remove(iteminHost)  
+
+
+            #listinEqual.remove()
+
+            dataFrom_IPs.at[index, 'Diff'] = listinDiff
+            dataFrom_IPs.at[index, 'Equals'] = listinEqual
+
+            # dataFrom_IPs.at[index, 'Equals'] = iteminHost
+            # tempA = listB
+            # tempA = tempA.replace(iteminHost, '')
+            # tempA= tempA.split(",")
+            # tempA.remove(iteminHost)
+            # dataFrom_IPs.at[index, 'Diff'] = str(tempA)
+
+print(dataFrom_IPs.head(4))
