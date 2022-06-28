@@ -50,7 +50,8 @@ for i, iteminHost in enumerate(list_Host):
             #remover caso esteja na lista de Diff
             if iteminHost in listinDiff:
                 listinDiff.remove(iteminHost)  
-
+            if '#' in listinEqual:
+                listinEqual.remove('#')  
 
             #listinEqual.remove()
 
