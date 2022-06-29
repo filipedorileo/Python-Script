@@ -2,8 +2,12 @@
 # coding: utf-8
 
 import pandas as pd
+import time
 
 
+startTime=time.time()
+#IpTeste
+#Ips
 dataFrom_IPs = pd.read_csv(r'C:\Users\Findmore\Desktop\IpTeste.csv', sep=';')
 dataFrom_IPs['Equals']=dataFrom_IPs['Equals'].fillna('0')
 dataFrom_IPs['Ips']=dataFrom_IPs['Ips'].fillna('0')
@@ -42,6 +46,7 @@ for i, iteminHost in enumerate(list_Host):
 
             listinEqual=dataFrom_IPs.at[index, 'Equals']
             listinDiff=dataFrom_IPs.at[index, 'Diff']
+            listinName=dataFrom_IPs.at[i, 'Name']
 
             if not isinstance(listinEqual,list):
                 listinEqual=listinEqual.split(",")
@@ -49,8 +54,7 @@ for i, iteminHost in enumerate(list_Host):
             if not isinstance(listinDiff,list):
                 listinDiff=listinDiff.split(",")            
             
-            #adicionar o que é igual
-            listinEqual.append(iteminHost)
+
 
             #remover caso esteja na lista de Diff
             if iteminHost in listinDiff:
@@ -59,6 +63,14 @@ for i, iteminHost in enumerate(list_Host):
                 listinEqual.remove('0')  
 
             #listinEqual.remove()
+
+
+
+            #adicionar o que é igual
+            listinEqual.append(listinName)
+
+
+
 
             dataFrom_IPs.at[index, 'Diff'] = listinDiff
             dataFrom_IPs.at[index, 'Equals'] = listinEqual
@@ -70,10 +82,33 @@ for i, iteminHost in enumerate(list_Host):
             # tempA.remove(iteminHost)
             # dataFrom_IPs.at[index, 'Diff'] = str(tempA)
 
-            
-dataFrom_IPs.to_excel(r'C:\Users\Findmore\Desktop\FINAL.xlsx', index = False)
+print('======================')
 print(dataFrom_IPs.head(4))
+print('======================')
+print('======================')
+print('Agora vamos colocar os nomes')
+print('======================')
+#Colocar os nomes
 
+# for i, iteminHost in enumerate(list_Host):
+#        for index, listinIps in enumerate(list_Ips):
+#         listinEqual=[]
+#         listinName=[]
+#         listinEqual=dataFrom_IPs.at[index, 'Equals']
+#         listinName=dataFrom_IPs.at[index, 'Name']
 
+#         if iteminHost in listinEqual:
+#             listinEqual.remove(iteminHost) 
+#             listinEqual.append(listinName)
+#             dataFrom_IPs.at[index, 'Equals'] = listinEqual
 
+dataFrom_IPs.to_excel(r'C:\Users\Findmore\Desktop\FINAL.xlsx', index = False)
+
+print('======================')
+print(dataFrom_IPs.head(4))
+print('======================')
+
+print('======================')
+print(time.time()-startTime)
+print('======================')
        
