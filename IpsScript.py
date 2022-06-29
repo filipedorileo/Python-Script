@@ -3,7 +3,16 @@
 
 import pandas as pd
 
-dataFrom_IPs = pd.read_csv(r'C:\Users\Findmore\Desktop\Ips.csv', sep=';')
+
+dataFrom_IPs = pd.read_csv(r'C:\Users\Findmore\Desktop\IpTeste.csv', sep=';')
+dataFrom_IPs['Equals']=dataFrom_IPs['Equals'].fillna('0')
+dataFrom_IPs['Ips']=dataFrom_IPs['Ips'].fillna('0')
+dataFrom_IPs['Diff']=dataFrom_IPs['Diff'].fillna('0')
+
+print(dataFrom_IPs.head(4))
+
+
+
 listA = []
 listB = []
 Equals = []
@@ -33,16 +42,12 @@ for i, iteminHost in enumerate(list_Host):
 
             listinEqual=dataFrom_IPs.at[index, 'Equals']
             listinDiff=dataFrom_IPs.at[index, 'Diff']
-            if isinstance(listinEqual,list):
-                print("ok")
-            else:
+
+            if not isinstance(listinEqual,list):
                 listinEqual=listinEqual.split(",")
 
-            if isinstance(listinDiff,list):
-                print("ok")
-            else:
-                listinDiff=listinDiff.split(",")
-            
+            if not isinstance(listinDiff,list):
+                listinDiff=listinDiff.split(",")            
             
             #adicionar o que é igual
             listinEqual.append(iteminHost)
@@ -50,8 +55,8 @@ for i, iteminHost in enumerate(list_Host):
             #remover caso esteja na lista de Diff
             if iteminHost in listinDiff:
                 listinDiff.remove(iteminHost)  
-            if '#' in listinEqual:
-                listinEqual.remove('#')  
+            if '0' in listinEqual:
+                listinEqual.remove('0')  
 
             #listinEqual.remove()
 
@@ -65,4 +70,10 @@ for i, iteminHost in enumerate(list_Host):
             # tempA.remove(iteminHost)
             # dataFrom_IPs.at[index, 'Diff'] = str(tempA)
 
+            
+dataFrom_IPs.to_excel(r'C:\Users\Findmore\Desktop\FINAL.xlsx', index = False)
 print(dataFrom_IPs.head(4))
+
+
+
+       
